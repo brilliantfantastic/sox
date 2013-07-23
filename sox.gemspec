@@ -13,6 +13,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.version       = Sox::VERSION
 
+  gem.add_dependency 'bubble-wrap', '~> 1.3.0'
+
   gem.add_development_dependency 'bacon'
   gem.add_development_dependency 'rake'
 end
