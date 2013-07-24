@@ -1,5 +1,7 @@
 module Sox
   module XML
+    class ParserError < StandardError; end
+
     class Parser
       def initialize(data)
         @data = data
@@ -29,7 +31,7 @@ module Sox
       end
 
       def parser(parser, parseErrorOccurred:parse_error)
-        puts "ERROR #{parse_error.localizedDescription}"
+        raise ParserError.new(parse_error.localizedDescription)
       end
 
       private

@@ -73,9 +73,7 @@ describe Sox::XML::Parser do
 
     describe 'with a simple embedded element' do
       before do
-        document = "
-          <element_one><element_two></element_two></element_one>
-        "
+        document = "<element_one><element_two></element_two></element_one>"
         @parser = Sox::XML::Parser.new document
       end
 
@@ -83,6 +81,43 @@ describe Sox::XML::Parser do
         hash = nil
         @parser.parse { |hsh| hash = hsh }
         hash.should == { element_one: { element_two: {} } }
+      end
+    end
+
+    describe 'with a simple embedded element and a value' do
+      before do
+        document = "<element_one><element_two>value two</element_two></element_one>"
+        @parser = Sox::XML::Parser.new document
+      end
+
+      it 'creates a hash representing the document' do
+        hash = nil
+        @parser.parse { |hsh| hash = hsh }
+        hash.should == { element_one: { element_two: { data: 'value two' } } }
+      end
+    end
+
+    describe 'with a simple embedded element, a value, and some attributes' do
+      before do
+        document = "<element_one attribute_one=\"attribute one\"><element_two attribute_two=\"attribute two\">value two</element_two></element_one>"
+        @parser = Sox::XML::Parser.new document
+      end
+
+      it 'creates a hash representing the document' do
+        hash = nil
+        @parser.parse { |hsh| hash = hsh }
+        hash.should == { element_one: { attribute_one: 'attribute one', element_two: { attribute_two: 'attribute two', data: 'value two' } } }
+      end
+    end
+
+    describe 'with an invalid xml document' do
+      before do
+        document = '<element value></element>'
+        @parser = Sox::XML::Parser.new document
+      end
+
+      it 'raises a parser error' do
+        should.raise(Sox::XML::ParserError) { @parser.parse }
       end
     end
   end
