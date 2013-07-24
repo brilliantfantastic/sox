@@ -1,5 +1,7 @@
 module Sox
   class Client
+    include Sox::Proxy
+
     attr_reader :base_url
 
     def initialize(subdomain, api_token)
@@ -11,14 +13,8 @@ module Sox
       { username: @api_token, password: 'X' }
     end
 
-    def get(request, &block)
-      options = { credentials: auth }
-      options.merge!({ payload: '<request method="client.list"></request>' })
-      BW::HTTP.post(@base_url, options) do |response|
-        #XML::Parser.new(response.body).parse do |hash|
-        block.call response.body
-        #end
-      end
+    def clients
+      proxy(:client)
     end
   end
 end

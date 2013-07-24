@@ -1,9 +1,5 @@
 describe Sox::Client do
-  extend WebStub::SpecHelpers
-
   before do
-    #disable_network_access!
-
     @subdomain = 'fake'
     @api_token = '1234'
     @client = Sox::Client.new @subdomain, @api_token
@@ -21,15 +17,9 @@ describe Sox::Client do
     end
   end
 
-  describe 'retrieving a list of clients for the account' do
-    it 'retrieves the client id from Freshbooks' do
-      @client.get :clients do |response|
-        @response = response
-        resume
-      end
-      wait_max 1.0 do
-        @response.length.should == '1234'
-      end
+  describe '#clients' do
+    it 'returns a proxy object' do
+      @client.clients.prefix.should == :client
     end
   end
 end
