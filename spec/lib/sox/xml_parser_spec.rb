@@ -10,5 +10,11 @@ describe Sox::XML::Parser do
       @parser.parse { |hsh| hash = hsh }
       hash.should != nil
     end
+
+    it 'creates a hash with the element' do
+      hash = nil
+      @parser.parse { |hsh| hash = hsh }
+      hash.should == { element: {} }
+    end
   end
 end
