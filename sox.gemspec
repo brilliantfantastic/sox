@@ -15,6 +15,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'bubble-wrap', '~> 1.3.0'
 
+  gem.add_development_dependency 'webstub'
   gem.add_development_dependency 'bacon'
   gem.add_development_dependency 'rake'
 end

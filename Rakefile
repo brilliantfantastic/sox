@@ -8,6 +8,7 @@ $:.unshift("/Library/RubyMotion/lib")
 
 require 'bundler'
 require 'bubble-wrap'
+require 'webstub'
 
 Bundler.setup
 Bundler.require
