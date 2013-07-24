@@ -1,17 +1,34 @@
 describe Sox::Client do
-  describe '#get' do
-    before do
-      @subdomain = 'fake'
-      @api_token = '12345'
-    end
+  extend WebStub::SpecHelpers
 
+  before do
+    #disable_network_access!
+
+    @subdomain = 'fake'
+    @api_token = '1234'
+    @client = Sox::Client.new @subdomain, @api_token
+  end
+
+  describe '#initialize' do
+    it 'sets the base url' do
+      @client.base_url.should == "https://#{@subdomain}.freshbooks.com/api/#{Sox::API_VERSION}/xml-in"
+    end
+  end
+
+  describe '#auth' do
+    it 'sets the auth header using basic auth' do
+      @client.auth.should == { username: @api_token, password: 'X' }
+    end
+  end
+
+  describe 'retrieving a list of clients for the account' do
     it 'retrieves the client id from Freshbooks' do
-      Sox::Client.get @subdomain, @api_token do |client|
-        @client = client
+      @client.get :clients do |response|
+        @response = response
         resume
       end
       wait_max 1.0 do
-        @client.client_id.should == '1234'
+        @response.length.should == '1234'
       end
     end
   end
