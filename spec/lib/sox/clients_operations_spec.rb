@@ -3,16 +3,19 @@ describe 'Freshbooks API clients operations' do
 
   before do
     disable_network_access!
+    @client = Sox::Client.new 'fake', '12345'
+    @all_clients_response = '<response xmlns="http://www.freshbooks.com/api/" status="ok"></response>'
   end
 
-  describe 'fetching all of the clients' do
+  it 'can fetch all of the clients' do
+    stub_request(:post, @client.base_url).to_return body: @all_clients_response, content_type: 'application/xml'
+
     @client.clients.all do |response|
       @response = response
       resume
     end
     wait_max 1.0 do
-      puts @response
-      #@response.length.should == '1234'
+      @response[:response][:status].should == 'ok'
     end
   end
 end
