@@ -22,6 +22,10 @@ module Sox
         attrs.each {|k, v| @current = @current.merge!(k.to_sym => v)} if attrs
       end
 
+      def parser(parser, didEndElement:element, namespaceURI:uri, qualifiedName:name)
+        @current = @result[@result.keys[-1]]
+      end
+
       def parser(parser, foundCharacters:string)
         @current = @current.merge! data: string
       end

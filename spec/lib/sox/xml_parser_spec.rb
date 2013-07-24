@@ -110,6 +110,20 @@ describe Sox::XML::Parser do
       end
     end
 
+    describe 'with multiple child elements' do
+      before do
+      document = "<element_one><element_two>value two</element_two><element_three>value three</element_three></element_one>"
+        @parser = Sox::XML::Parser.new(document.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
+      end
+
+      it 'creates a hash representing the document' do
+        hash = nil
+        @parser.parse { |hsh| hash = hsh }
+        hash.should == { element_one: { element_two: { data: 'value two' }, element_three: { data: 'value three' } } }
+      end
+
+    end
+
     describe 'with an invalid xml document' do
       before do
         document = '<element value></element>'
