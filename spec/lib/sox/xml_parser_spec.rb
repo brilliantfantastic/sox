@@ -3,7 +3,7 @@ describe Sox::XML::Parser do
     describe 'with a simple single element' do
       before do
         document = "<element></element>"
-        @parser = Sox::XML::Parser.new document
+        @parser = Sox::XML::Parser.new(document.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
       end
 
       it 'yields to the block once parsing has finished' do
@@ -22,7 +22,7 @@ describe Sox::XML::Parser do
     describe 'with a simple single element and data' do
       before do
         document = "<element>value</element>"
-        @parser = Sox::XML::Parser.new document
+        @parser = Sox::XML::Parser.new(document.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
       end
 
       it 'creates a hash representing the document' do
@@ -35,7 +35,7 @@ describe Sox::XML::Parser do
     describe 'with a simple single element and an attribute' do
       before do
         document = "<element attribute=\"attribute one\"></element>"
-        @parser = Sox::XML::Parser.new document
+        @parser = Sox::XML::Parser.new(document.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
       end
 
       it 'creates a hash representing the document' do
@@ -48,7 +48,7 @@ describe Sox::XML::Parser do
     describe 'with a simple single element and multiple attribute' do
       before do
         document = "<element attribute_one=\"attribute one\" attribute_two=\"attribute two\"></element>"
-        @parser = Sox::XML::Parser.new document
+        @parser = Sox::XML::Parser.new(document.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
       end
 
       it 'creates a hash representing the document' do
@@ -61,7 +61,7 @@ describe Sox::XML::Parser do
     describe 'with a simple single element, multiple attribute, and a value' do
       before do
         document = "<element attribute_one=\"attribute one\" attribute_two=\"attribute two\">value</element>"
-        @parser = Sox::XML::Parser.new document
+        @parser = Sox::XML::Parser.new(document.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
       end
 
       it 'creates a hash representing the document' do
@@ -74,7 +74,7 @@ describe Sox::XML::Parser do
     describe 'with a simple embedded element' do
       before do
         document = "<element_one><element_two></element_two></element_one>"
-        @parser = Sox::XML::Parser.new document
+        @parser = Sox::XML::Parser.new(document.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
       end
 
       it 'creates a hash representing the document' do
@@ -87,7 +87,7 @@ describe Sox::XML::Parser do
     describe 'with a simple embedded element and a value' do
       before do
         document = "<element_one><element_two>value two</element_two></element_one>"
-        @parser = Sox::XML::Parser.new document
+        @parser = Sox::XML::Parser.new(document.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
       end
 
       it 'creates a hash representing the document' do
@@ -100,7 +100,7 @@ describe Sox::XML::Parser do
     describe 'with a simple embedded element, a value, and some attributes' do
       before do
         document = "<element_one attribute_one=\"attribute one\"><element_two attribute_two=\"attribute two\">value two</element_two></element_one>"
-        @parser = Sox::XML::Parser.new document
+        @parser = Sox::XML::Parser.new(document.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
       end
 
       it 'creates a hash representing the document' do
@@ -113,7 +113,7 @@ describe Sox::XML::Parser do
     describe 'with an invalid xml document' do
       before do
         document = '<element value></element>'
-        @parser = Sox::XML::Parser.new document
+        @parser = Sox::XML::Parser.new(document.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
       end
 
       it 'raises a parser error' do

@@ -37,8 +37,7 @@ module Sox
       private
 
       def parse_data(data)
-        document = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-        parser = NSXMLParser.alloc.initWithData(document)
+        parser = NSXMLParser.alloc.initWithData(data)
         parser.shouldProcessNamespaces = true
         parser.delegate = self
         parser.parse
