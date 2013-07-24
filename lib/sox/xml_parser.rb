@@ -12,14 +12,16 @@ module Sox
 
       def parserDidStartDocument(parser)
         @result = {}
+        @current = @result
       end
 
       def parser(parser, didStartElement:element, namespaceURI:uri, qualifiedName:name, attributes:attrs)
-        @result[element.to_sym] = {}
+        @current = @result[element.to_sym] = {} if element
+        attrs.each {|k, v| @current = @current.merge!(k.to_sym => v)} if attrs
       end
 
       def parser(parser, foundCharacters:string)
-        puts "DID FIND CHARACTERS #{string}"
+        @current = @current.merge! data: string
       end
 
       def parserDidEndDocument(parser)
