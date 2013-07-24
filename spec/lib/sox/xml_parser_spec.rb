@@ -58,5 +58,17 @@ describe Sox::XML::Parser do
       end
     end
 
+    describe 'with a simple single element, multiple attribute, and a value' do
+      before do
+        document = "<element attribute_one=\"attribute one\" attribute_two=\"attribute two\">value</element>"
+        @parser = Sox::XML::Parser.new document
+      end
+
+      it 'creates a hash representing the document' do
+        hash = nil
+        @parser.parse { |hsh| hash = hsh }
+        hash.should == { element: { attribute_one: 'attribute one', attribute_two: 'attribute two', data: 'value' } }
+      end
+    end
   end
 end
