@@ -70,5 +70,20 @@ describe Sox::XML::Parser do
         hash.should == { element: { attribute_one: 'attribute one', attribute_two: 'attribute two', data: 'value' } }
       end
     end
+
+    describe 'with a simple embedded element' do
+      before do
+        document = "
+          <element_one><element_two></element_two></element_one>
+        "
+        @parser = Sox::XML::Parser.new document
+      end
+
+      it 'creates a hash representing the document' do
+        hash = nil
+        @parser.parse { |hsh| hash = hsh }
+        hash.should == { element_one: { element_two: {} } }
+      end
+    end
   end
 end

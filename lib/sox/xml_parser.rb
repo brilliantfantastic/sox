@@ -16,7 +16,7 @@ module Sox
       end
 
       def parser(parser, didStartElement:element, namespaceURI:uri, qualifiedName:name, attributes:attrs)
-        @current = @result[element.to_sym] = {} if element
+        @current = @current[element.to_sym] = {} if element
         attrs.each {|k, v| @current = @current.merge!(k.to_sym => v)} if attrs
       end
 
