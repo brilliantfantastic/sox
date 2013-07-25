@@ -14,7 +14,6 @@ module Sox
 
       def parserDidStartDocument(parser)
         @result = [{}]
-        @current = ''
       end
 
       def parser(parser, didStartElement:element, namespaceURI:uri, qualifiedName:name, attributes:attrs)
@@ -37,19 +36,11 @@ module Sox
       end
 
       def parser(parser, didEndElement:element, namespaceURI:uri, qualifiedName:name)
-        last_result = @result.last
-
-        if @current.length > 0
-          last_result[:data] = @current.chomp
-
-          @current = ''
-        end
-
-        @result.removeLastObject
+        @result.pop
       end
 
       def parser(parser, foundCharacters:string)
-        @current.appendString string
+        @result.last[:data] = string
       end
 
       def parserDidEndDocument(parser)
