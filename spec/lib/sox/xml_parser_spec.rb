@@ -136,6 +136,19 @@ describe Sox::XML::Parser do
       end
     end
 
+    describe 'with an array with arrays of child elements' do
+      before do
+        document = "<parent><children><child></child><child><toys><toy></toy></toys></child></children></parent>"
+        @parser = Sox::XML::Parser.new(document.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
+      end
+
+      it 'creates a hash representing the document' do
+        hash = nil
+        @parser.parse { |hsh| hash = hsh }
+        hash.should == { parent: { children: { child: [{}, { toys: { toy: {} } } ] } } }
+      end
+    end
+
     describe 'with an invalid xml document' do
       before do
         document = '<element value></element>'

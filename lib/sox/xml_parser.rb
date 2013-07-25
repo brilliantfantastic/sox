@@ -13,49 +13,39 @@ module Sox
       end
 
       def parserDidStartDocument(parser)
-        @result = {}
+        @result = [{}]
         @current = ''
-        @dictStack = [{}]
       end
 
       def parser(parser, didStartElement:element, namespaceURI:uri, qualifiedName:name, attributes:attrs)
-        parentDict = @dictStack.last
+        element = element.to_sym
+        parent = @result.last
 
-        childDict = {}
-        attrs.each { |k, v| childDict[k.to_sym] = v } if attrs
+        child = {}
+        attrs.each { |k, v| child[k.to_sym] = v } if attrs
 
-        existingValue = parentDict.objectForKey(element.to_sym)
+        existing = parent[element]
 
-        if existingValue
-          array = []
-          if existingValue.is_a? Array
-            array = existingValue
-          else
-            array << existingValue
-
-            parentDict.setObject(array, forKey:element.to_sym)
-          end
-
-          array << childDict
+        if existing
+          values = existing.is_a?(Array) ? existing << child : [existing, child]
+          parent[element] = values
         else
-          parentDict.setObject(childDict, forKey:element.to_sym)
+          parent[element] = child
         end
 
-        @dictStack << childDict
-
+        @result << child
       end
 
       def parser(parser, didEndElement:element, namespaceURI:uri, qualifiedName:name)
-        dictInProgress = @dictStack.last
+        last_result = @result.last
 
-        if (@current.length > 0)
-          trimmedString = @current.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet)
-          dictInProgress.setObject(trimmedString.mutableCopy, forKey: :data)
+        if @current.length > 0
+          last_result[:data] = @current.chomp
 
           @current = ''
         end
 
-        @dictStack.removeLastObject
+        @result.removeLastObject
       end
 
       def parser(parser, foundCharacters:string)
@@ -63,8 +53,7 @@ module Sox
       end
 
       def parserDidEndDocument(parser)
-        @result = @dictStack.first
-        @callback.call(@result) if @callback
+        @callback.call(@result.first) if @callback
       end
 
       def parser(parser, parseErrorOccurred:parse_error)
