@@ -132,7 +132,7 @@ describe Sox::XML::Parser do
       it 'creates a hash representing the document' do
         hash = nil
         @parser.parse { |hsh| hash = hsh }
-        hash.should == { parent: { children: [{ child: {} }, { child: {} }] } }
+        hash.should == { parent: { children: { child: [{}, {}]} } }
       end
     end
 
