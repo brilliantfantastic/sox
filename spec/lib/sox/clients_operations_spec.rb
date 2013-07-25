@@ -16,7 +16,10 @@ describe 'Freshbooks API clients operations' do
       resume
     end
     wait_max 1.0 do
-      @response[:response][:status].should == 'ok'
+      response = @response[:response]
+      response[:status].should == 'ok'
+      response[:clients][:total].should == '2'
+      response[:clients][:client][0][:client_id][:data].should == '1'
     end
   end
 end

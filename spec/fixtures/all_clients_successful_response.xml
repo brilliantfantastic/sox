@@ -1,1 +1,10 @@
-<response xmlns="http://www.freshbooks.com/api/" status="ok"></response>
+<response xmlns="http://www.freshbooks.com/api/" status="ok">
+  <clients page="1" per_page="25" pages="1" total="2">
+    <client>
+      <client_id>1</client_id>
+    </client>
+    <client>
+      <client_id>1</client_id>
+    </client>
+  </clients>
+</response>
