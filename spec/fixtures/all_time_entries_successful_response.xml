@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<response xmlns="http://www.freshbooks.com/api/" status="ok">
+  <time_entries page="1" per_page="15" pages="10" total="2">
+    <time_entry>
+      <time_entry_id>211</time_entry_id>
+      <staff_id>1</staff_id>
+      <project_id>1</project_id>
+      <task_id>1</task_id>
+      <hours>2</hours>
+      <date>2009-03-13</date>
+      <notes>Sample Notes</notes>
+      <billed>0</billed>   <!-- 1 or 0 (Read Only) -->
+    </time_entry>
+    <time_entry>
+    </time_entry>
+  </time_entries>
+</response>

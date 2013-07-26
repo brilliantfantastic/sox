@@ -29,6 +29,12 @@ describe Sox::Client do
     end
   end
 
+  describe '#time_entries' do
+    it 'returns a proxy object' do
+      @client.time_entries.prefix.should == :time_entry
+    end
+  end
+
   it 'can have multiple proxies' do
     @client.clients.prefix.should == :client
     @client.projects.prefix.should == :project

@@ -20,5 +20,9 @@ module Sox
     def projects
       proxy(:project)
     end
+
+    def time_entries
+      proxy(:time_entry)
+    end
   end
 end
