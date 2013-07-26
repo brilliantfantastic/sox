@@ -72,7 +72,7 @@ This is a very early release. All the base classes and supporting classes should
 * Staff (current, get, list)
 * Tasks (create, update, get, delete, list)
 * Taxes (create, update, get, delete, list)
-* Time entries (create, update, get, delete)
+* Time entries (update, get, delete)
 
 ## Contributing
 
