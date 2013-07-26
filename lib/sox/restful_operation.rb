@@ -13,9 +13,7 @@ module Sox
       opts = { credentials: @auth }
       opts.merge!({ payload: payload })
       BW::HTTP.post(@base_url, opts) do |response|
-        XML::Parser.new(response.body).parse do |hash|
-          block.call hash
-        end
+        XML::Parser.new(response.body).parse { |hash| block.call hash }
       end
     end
   end
