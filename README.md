@@ -31,7 +31,7 @@ Currenly Sox only supports basic authentication using your Freshbooks API token 
 You can retrieve your Freshbooks API token from the 'My Account' page on Freshbooks.
 
 ```ruby
-@client = Sox::Client 'your-freshbooks-subdomain', 'api-token'
+@client = Sox::Client.new 'your-freshbooks-subdomain', 'api-token'
 ```
 
 You can then use your client object to perform the CRUD operations on Freshbooks.
