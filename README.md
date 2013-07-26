@@ -52,6 +52,7 @@ This is a very early release. All the base classes and supporting classes should
 
 * Currently only setup for OSX
 * Add integration tests for real API data
+* Support for OAuth authentication
 
 * Clients (create, update, get, delete)
 * Projects (create, update, get, delete)
