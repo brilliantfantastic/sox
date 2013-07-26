@@ -13,4 +13,9 @@ describe Sox::RequestOptions do
     request = Sox::RequestOptions.new('client.list', { client: { client_id: 1 } }).request
     request.should == '<request method="client.list"><client><client_id>1</client_id></client></request>'
   end
+
+  it 'converts a super duper embedded hash to xml' do
+    request = Sox::RequestOptions.new('client.list', { client: { address: { street: '123 Main St.' } } }).request
+    request.should == '<request method="client.list"><client><address><street>123 Main St.</street></address></client></request>'
+  end
 end

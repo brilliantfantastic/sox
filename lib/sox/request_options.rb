@@ -34,6 +34,7 @@ module Sox
         el = NSXMLElement.alloc.initWithName(key, stringValue: value.to_s)
         element.addChild el
       end
+      element
     end
   end
 end
