@@ -9,9 +9,10 @@ module Sox
     end
 
     def all(options={}, &block)
-      options.merge!({ credentials: @auth })
-      options.merge!({ payload: "<request method=\"#{@prefix}.list\"></request>" })
-      BW::HTTP.post(@base_url, options) do |response|
+      payload = RequestOptions.new("#{@prefix}.list", options).request
+      opts = { credentials: @auth }
+      opts.merge!({ payload: payload })
+      BW::HTTP.post(@base_url, opts) do |response|
         XML::Parser.new(response.body).parse do |hash|
           block.call hash
         end
