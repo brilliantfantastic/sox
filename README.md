@@ -70,8 +70,8 @@ This is a very early release. All the base classes and supporting classes should
 * Recurring (create, update, get, delete, list)
 * Recurring Items (add, delete, update)
 * Staff (current, get, list)
-* Tasks (create, update, get, delete)
-* Taxes (create, update, get, delete)
+* Tasks (create, update, get, delete, list)
+* Taxes (create, update, get, delete, list)
 * Time entries (create, update, get, delete)
 
 ## Contributing
