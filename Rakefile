@@ -13,6 +13,8 @@ require 'webstub'
 Bundler.setup
 Bundler.require
 
+Bundler::GemHelper.install_tasks
+
 namespace :spec do
   task :lib do
     sh "bacon #{Dir.glob("spec/lib/**/*_spec.rb").join(' ')}"
