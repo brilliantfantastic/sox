@@ -16,6 +16,15 @@ module Sox
         XML::Parser.new(response.body).parse { |hash| block.call hash }
       end
     end
+
+    def create(options={}, &block)
+      payload = RequestOptions.new("#{@prefix}.create", options).request
+      opts = { credentials: @auth }
+      opts.merge!({ payload: payload })
+      BW::HTTP.post(@base_url, opts) do |response|
+        XML::Parser.new(response.body).parse { |hash| block.call hash }
+      end
+    end
   end
 end
 
