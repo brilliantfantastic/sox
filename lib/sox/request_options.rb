@@ -28,12 +28,11 @@ module Sox
         parent = NSXMLElement.alloc.initWithName(key)
         value.each do |k, v|
           el = generate_xml_node parent, k, v
-          element.addChild el
         end
       else
         el = NSXMLElement.alloc.initWithName(key, stringValue: value.to_s)
-        element.addChild el
       end
+      element.addChild el
       element
     end
   end

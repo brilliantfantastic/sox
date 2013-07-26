@@ -18,4 +18,9 @@ describe Sox::RequestOptions do
     request = Sox::RequestOptions.new('client.list', { client: { address: { street: '123 Main St.' } } }).request
     request.should == '<request method="client.list"><client><address><street>123 Main St.</street></address></client></request>'
   end
+
+  it 'converts a converts a child list to xml' do
+    request = Sox::RequestOptions.new('client.list', { client: { attribute_one: 1, attribute_two: 2 } }).request
+    request.should == '<request method="client.list"><client><attribute_one>1</attribute_one><attribute_two>2</attribute_two></client></request>'
+  end
 end
