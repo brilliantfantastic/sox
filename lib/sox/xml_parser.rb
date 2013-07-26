@@ -40,7 +40,7 @@ module Sox
       end
 
       def parser(parser, foundCharacters:string)
-        @result.last[:data] = string
+        @result.last[:data] = string.strip
       end
 
       def parserDidEndDocument(parser)
