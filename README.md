@@ -55,7 +55,7 @@ This is a very early release. All the base classes and supporting classes should
 * Support for OAuth authentication
 
 * Clients (update, get, delete)
-* Projects (create, update, get, delete)
+* Projects (update, get, delete)
 * Categories (create, update, get, delete, list)
 * Estimates (create, update, get, delete, list, sendByEmail)
 * Categories (create, update, get, delete, list)
