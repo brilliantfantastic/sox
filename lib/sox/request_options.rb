@@ -16,14 +16,24 @@ module Sox
       root.addAttribute NSXMLNode.attributeWithName('method', stringValue: @method)
 
       # Add all the options if there are any
-      @options.each do |key, value|
-        element = NSXMLElement.alloc.initWithName key, stringValue: value.to_s
-        root.addChild element
-      end
+      @options.each { |key, value| generate_xml_node root, key, value }
 
       document = NSXMLDocument.alloc.initWithRootElement root
       data = document.XMLDataWithOptions NSXMLDocumentTidyXML
       NSString.alloc.initWithData(data, encoding: NSUTF8StringEncoding)
+    end
+
+    def generate_xml_node(element, key, value)
+      if value.is_a? Hash
+        parent = NSXMLElement.alloc.initWithName(key)
+        value.each do |k, v|
+          el = generate_xml_node parent, k, v
+          element.addChild el
+        end
+      else
+        el = NSXMLElement.alloc.initWithName(key, stringValue: value.to_s)
+        element.addChild el
+      end
     end
   end
 end
