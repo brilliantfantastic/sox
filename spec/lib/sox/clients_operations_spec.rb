@@ -20,6 +20,9 @@ describe 'Freshbooks API clients operations' do
       response[:status].should == 'ok'
       response[:clients][:total].should == '2'
       response[:clients][:client][0][:client_id][:data].should == '1'
+      response[:clients][:client][0][:first_name][:data].should == 'Jane'
+      response[:clients][:client][1][:client_id][:data].should == '2'
+      response[:clients][:client][1][:first_name][:data].should == 'John'
     end
   end
 end

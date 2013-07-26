@@ -2,9 +2,13 @@
   <clients page="1" per_page="25" pages="1" total="2">
     <client>
       <client_id>1</client_id>
+      <first_name>Jane</first_name>
+      <last_name>Doe</last_name>
     </client>
     <client>
-      <client_id>1</client_id>
+      <client_id>2</client_id>
+      <first_name>John</first_name>
+      <last_name>Doe</last_name>
     </client>
   </clients>
 </response>
