@@ -54,7 +54,7 @@ This is a very early release. All the base classes and supporting classes should
 * Add integration tests for real API data
 * Support for OAuth authentication
 
-* Clients (create, update, get, delete)
+* Clients (update, get, delete)
 * Projects (create, update, get, delete)
 * Categories (create, update, get, delete, list)
 * Estimates (create, update, get, delete, list, sendByEmail)
