@@ -16,5 +16,9 @@ module Sox
     def clients
       proxy(:client)
     end
+
+    def projects
+      proxy(:project)
+    end
   end
 end
