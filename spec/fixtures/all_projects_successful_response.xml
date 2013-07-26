@@ -1,5 +1,5 @@
 <response xmlns="http://www.freshbooks.com/api/" status="ok">
-  <projects page="1" per_page="15" pages="1" total="5">
+  <projects page="1" per_page="15" pages="1" total="2">
     <project>
       <project_id>6</project_id>
       <name>Super Fun Project</name>
