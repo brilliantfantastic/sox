@@ -1,10 +1,11 @@
 module Sox
   module Proxy
     def proxy(name)
-      unless @proxy
-        @proxy = RestfulOperation.new(base_url, auth, name)
+      @proxies = {} unless @proxies
+      unless @proxies.key? name
+        @proxies[name] = RestfulOperation.new(base_url, auth, name)
       end
-      @proxy
+      @proxies[name]
     end
   end
 end

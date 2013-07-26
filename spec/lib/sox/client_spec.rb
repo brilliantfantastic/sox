@@ -22,4 +22,15 @@ describe Sox::Client do
       @client.clients.prefix.should == :client
     end
   end
+
+  describe '#projects' do
+    it 'returns a proxy object' do
+      @client.projects.prefix.should == :project
+    end
+  end
+
+  it 'can have multiple proxies' do
+    @client.clients.prefix.should == :client
+    @client.projects.prefix.should == :project
+  end
 end
