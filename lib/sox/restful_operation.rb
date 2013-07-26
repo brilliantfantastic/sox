@@ -9,16 +9,17 @@ module Sox
     end
 
     def all(options={}, &block)
-      payload = RequestOptions.new("#{@prefix}.list", options).request
-      opts = { credentials: @auth }
-      opts.merge!({ payload: payload })
-      BW::HTTP.post(@base_url, opts) do |response|
-        XML::Parser.new(response.body).parse { |hash| block.call hash }
-      end
+      post("#{@prefix}.list", options, &block)
     end
 
     def create(options={}, &block)
-      payload = RequestOptions.new("#{@prefix}.create", options).request
+      post("#{@prefix}.create", options, &block)
+    end
+
+    private
+
+    def post(path, options, &block)
+      payload = RequestOptions.new(path, options).request
       opts = { credentials: @auth }
       opts.merge!({ payload: payload })
       BW::HTTP.post(@base_url, opts) do |response|
